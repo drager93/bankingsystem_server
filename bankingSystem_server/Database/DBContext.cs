@@ -17,7 +17,7 @@ namespace bankingSystem_server.Database
 
         public virtual DbSet<TradeLog> TradeLog { get; set; }
         public virtual DbSet<User> User { get; set; }
-        
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -39,6 +39,9 @@ namespace bankingSystem_server.Database
                 entity.HasIndex(e => e.ItUserIndex)
                     .HasName("TL_UserIndex_idx");
 
+                entity.HasIndex(e => e.TlReceivedUserIndex)
+                    .HasName("TL_ReceivedUserIndex_idx");
+
                 entity.Property(e => e.TlIndex).HasColumnName("TL_Index");
 
                 entity.Property(e => e.ItUserIndex).HasColumnName("IT_UserIndex");
@@ -57,10 +60,15 @@ namespace bankingSystem_server.Database
                 entity.Property(e => e.TlType).HasColumnName("TL_Type");
 
                 entity.HasOne(d => d.ItUserIndexNavigation)
-                    .WithMany(p => p.TradeLog)
+                    .WithMany(p => p.TradeLogItUserIndexNavigation)
                     .HasForeignKey(d => d.ItUserIndex)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("TL_UserIndex");
+
+                entity.HasOne(d => d.TlReceivedUserIndexNavigation)
+                    .WithMany(p => p.TradeLogTlReceivedUserIndexNavigation)
+                    .HasForeignKey(d => d.TlReceivedUserIndex)
+                    .HasConstraintName("TL_ReceivedUserIndex");
             });
 
             modelBuilder.Entity<User>(entity =>

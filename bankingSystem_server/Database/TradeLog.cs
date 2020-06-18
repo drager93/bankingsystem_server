@@ -13,5 +13,6 @@ namespace bankingSystem_server.Database
         public DateTime TlCreatedTime { get; set; }
 
         public virtual User ItUserIndexNavigation { get; set; }
+        public virtual User TlReceivedUserIndexNavigation { get; set; }
     }
 }
