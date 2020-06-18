@@ -36,15 +36,13 @@ namespace bankingSystem_server.Database
 
                 entity.ToTable("trade_log");
 
-                entity.HasIndex(e => e.ItUserIndex)
-                    .HasName("TL_UserIndex_idx");
-
                 entity.HasIndex(e => e.TlReceivedUserIndex)
                     .HasName("TL_ReceivedUserIndex_idx");
 
-                entity.Property(e => e.TlIndex).HasColumnName("TL_Index");
+                entity.HasIndex(e => e.TlUserIndex)
+                    .HasName("TL_UserIndex_idx");
 
-                entity.Property(e => e.ItUserIndex).HasColumnName("IT_UserIndex");
+                entity.Property(e => e.TlIndex).HasColumnName("TL_Index");
 
                 entity.Property(e => e.TlContent)
                     .IsRequired()
@@ -59,16 +57,18 @@ namespace bankingSystem_server.Database
 
                 entity.Property(e => e.TlType).HasColumnName("TL_Type");
 
-                entity.HasOne(d => d.ItUserIndexNavigation)
-                    .WithMany(p => p.TradeLogItUserIndexNavigation)
-                    .HasForeignKey(d => d.ItUserIndex)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("TL_UserIndex");
+                entity.Property(e => e.TlUserIndex).HasColumnName("TL_UserIndex");
 
                 entity.HasOne(d => d.TlReceivedUserIndexNavigation)
                     .WithMany(p => p.TradeLogTlReceivedUserIndexNavigation)
                     .HasForeignKey(d => d.TlReceivedUserIndex)
                     .HasConstraintName("TL_ReceivedUserIndex");
+
+                entity.HasOne(d => d.TlUserIndexNavigation)
+                    .WithMany(p => p.TradeLogTlUserIndexNavigation)
+                    .HasForeignKey(d => d.TlUserIndex)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("TL_UserIndex");
             });
 
             modelBuilder.Entity<User>(entity =>

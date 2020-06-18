@@ -7,8 +7,8 @@ namespace bankingSystem_server.Database
     {
         public User()
         {
-            TradeLogItUserIndexNavigation = new HashSet<TradeLog>();
             TradeLogTlReceivedUserIndexNavigation = new HashSet<TradeLog>();
+            TradeLogTlUserIndexNavigation = new HashSet<TradeLog>();
         }
 
         public int UsrIndex { get; set; }
@@ -17,7 +17,7 @@ namespace bankingSystem_server.Database
         public string UsrPassword { get; set; }
         public int UsrAmount { get; set; }
 
-        public virtual ICollection<TradeLog> TradeLogItUserIndexNavigation { get; set; }
         public virtual ICollection<TradeLog> TradeLogTlReceivedUserIndexNavigation { get; set; }
+        public virtual ICollection<TradeLog> TradeLogTlUserIndexNavigation { get; set; }
     }
 }
