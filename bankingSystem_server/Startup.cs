@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using bankingSystem_server.Database;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -9,6 +10,8 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace bankingSystem_server
 {
@@ -31,8 +34,17 @@ namespace bankingSystem_server
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            services.AddDbContext<DBContext>();
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            // Router
+            services.AddMvc()
+               .AddJsonOptions(options =>
+               {
+                   options.SerializerSettings.ContractResolver = new DefaultContractResolver { NamingStrategy = new CamelCaseNamingStrategy() };
+                   options.SerializerSettings.DateTimeZoneHandling = DateTimeZoneHandling.Local;
+                   options.SerializerSettings.DateParseHandling = DateParseHandling.DateTimeOffset;
+               })
+               .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -42,23 +54,11 @@ namespace bankingSystem_server
             {
                 app.UseDeveloperExceptionPage();
             }
-            else
-            {
-                app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
-            }
 
-            app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
 
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
-            });
+            app.UseMvc();
         }
     }
 }

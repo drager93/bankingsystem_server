@@ -5,25 +5,26 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using bankingSystem_server.Models;
+using bankingSystem_server.Database;
 
 namespace bankingSystem_server.Controllers
 {
-    public class HomeController : Controller
+    [ApiController]
+    [Route("api/[controller]")]
+    public class HomeController : ControllerBase
     {
+        public DBContext DBContext { get; }
+
+        public HomeController(DBContext dbContext)
+        {
+            DBContext = dbContext;
+        }
+
+        [HttpGet]
         public IActionResult Index()
         {
-            return View();
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            var a = DBContext.User.ToList();
+            return Ok(a);
         }
     }
 }

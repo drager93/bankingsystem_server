@@ -1,0 +1,33 @@
+﻿<Properties StartupConfiguration="{38A0E737-5C92-4C0B-B643-2A1C424F789D}|Default">
+  <MonoDevelop.Ide.ItemProperties.bankingSystem__server PreferredExecutionTarget="/Applications/Safari.app" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="bankingSystem_server/Database/User.cs">
+    <Files>
+      <File FileName="bankingSystem_server/Controllers/HomeController.cs" Line="26" Column="44" />
+      <File FileName="bankingSystem_server/Startup.cs" Line="37" Column="48" />
+      <File FileName="bankingSystem_server/appsettings.Development.json" Line="8" Column="5" />
+      <File FileName="bankingSystem_server/Database/DBContext.cs" Line="25" Column="121" />
+      <File FileName="bankingSystem_server/Database/User.cs" Line="6" Column="11" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="bankingSystem_server" expanded="True">
+            <Node name="bankingSystem_server" expanded="True">
+              <Node name="Controllers" expanded="True" />
+              <Node name="Database" expanded="True">
+                <Node name="User.cs" selected="True" />
+              </Node>
+              <Node name="appsettings.json" expanded="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>

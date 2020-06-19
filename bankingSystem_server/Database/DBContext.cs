@@ -22,8 +22,7 @@ namespace bankingSystem_server.Database
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseMySql("Server=127.0.0.1;Port=3306;Database=banking;User=root;Password=ehddnr1213;");
+                optionsBuilder.UseMySql("Server=jinjoosoft.io;Port=43306;Database=banking;User=root;Password=naverscv123;");
             }
         }
 
@@ -34,7 +33,7 @@ namespace bankingSystem_server.Database
                 entity.HasKey(e => e.TlIndex)
                     .HasName("PRIMARY");
 
-                entity.ToTable("trade_log");
+                entity.ToTable("TradeLog");
 
                 entity.HasIndex(e => e.TlReceivedUserIndex)
                     .HasName("TL_ReceivedUserIndex_idx");
@@ -76,7 +75,7 @@ namespace bankingSystem_server.Database
                 entity.HasKey(e => e.UsrIndex)
                     .HasName("PRIMARY");
 
-                entity.ToTable("user");
+                entity.ToTable("User");
 
                 entity.Property(e => e.UsrIndex).HasColumnName("USR_Index");
 

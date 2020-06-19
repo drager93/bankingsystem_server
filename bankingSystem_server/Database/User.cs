@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace bankingSystem_server.Database
 {
+    [Table("User")]
     public partial class User
     {
         public User()
