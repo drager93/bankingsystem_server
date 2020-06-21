@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using bankingSystem_server.Database;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -36,6 +37,18 @@ namespace bankingSystem_server
 
             services.AddDbContext<DBContext>();
 
+            // CORS
+            //Cors 셋팅
+            services.AddCors(options =>
+            {
+                var origins = Configuration.GetSection("AllowedOrigins").GetChildren().Select(a => a.Value).ToArray();
+                var builder = new CorsPolicyBuilder(origins);
+                builder.AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowCredentials();
+                options.AddDefaultPolicy(builder.Build());
+            });
+
             // Router
             services.AddMvc()
                .AddJsonOptions(options =>
@@ -57,6 +70,7 @@ namespace bankingSystem_server
 
             app.UseStaticFiles();
             app.UseCookiePolicy();
+            app.UseCors();
 
             app.UseMvc();
         }
